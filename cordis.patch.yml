@@ -1,0 +1,5 @@
+# 本插件的装载声明（DSH 组合包入口）
+# 安装后由 DSH 读取，把下面的行注册进当前 profile。
+- insert:
+    - id: mobile-ux
+      name: dsh-plugin-mobile-ux

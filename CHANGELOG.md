@@ -2,6 +2,38 @@
 
 所有改动记录在此。版本遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## 1.4.1 — 2026-11-06
+
+### 根因：选择器用错了
+v1.3.x 全线使用 `[class*='sidebarCol']` 模糊匹配宿主的 CSS Modules 类名。
+但宿主类名是带哈希的（`hHd-Xa_root` / `pI_x6G_sidebarCol`），且随版本与状态变化 ——
+规则经常匹配不到，于是「有时生效有时不生效」。这才是「改一个坏一个」的技术根因，
+不是某个具体规则写错。
+
+### 换用宿主稳定钩子
+DSH 提供 39 个 `[data-slot]` 钩子与语义属性：
+
+| 钩子 | 用途 |
+|---|---|
+| `[data-slot="sidebar"]` | 侧栏包装（`display:contents`），其 `>*` 才是真正的侧栏 |
+| `[data-slot="main"]` | 主区包装（同样 contents） |
+| `[data-slot="conversation.header"]` | 会话标题栏 |
+| `[data-collapsed]` | 侧栏折叠状态 |
+| `[data-sidebar-right-expand]` | 右侧边栏入口 |
+
+参考实现：GitHub 上 `tecfancy/dsh-mobile`、`AliceLJY/dsh-thumb`、
+`jasondu/dsh-ui-mobile`、`MARYCOMPLEX/dsh-client-ui-mobile` 等 8 个同类插件
+均采用这套钩子，而不是哈希类名。
+
+### 结果：14 项回归全绿
+| 视口 | 鲸鱼按钮 | 无横向溢出 | 抽屉 | 遮罩关闭 | 右侧栏 |
+|---|---|---|---|---|---|
+| iPhone 390×844 | ✓ | ✓ | 280px | ✓ | cx=356 ✓ |
+| 横屏 844×390 | ✓ | ✓ | 280px | ✓ | — |
+| 安卓 360×800 | ✓ | ✓ | 280px | ✓ | cx=326 ✓ |
+
+JS 错误 0。默认开启两层；`?dshm=safe` 只开纯样式层，`?dshm=off` 全关。
+
 ## 1.4.0 — 2026-11-06
 
 一次结构性重写，起因是 1.3.x 反复出现「改一个坏一个」。根因是把「纯样式增强」

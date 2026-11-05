@@ -1,6 +1,6 @@
 {
   "name": "dsh-plugin-mobile-ux",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "DeepSeek Harness 手机端体验插件：侧栏抽屉、阅读排版、输入区适配、设置页全屏。纯前端注入，不修改宿主源码。",
   "private": true,
   "type": "module",

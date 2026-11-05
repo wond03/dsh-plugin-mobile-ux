@@ -1,0 +1,46 @@
+# Changelog
+
+所有改动记录在此。版本遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
+
+## [1.3.0] - 2026-11-05
+
+这一版的核心是**把宿主还原干净**，并把所有移动端改动收回插件内部。
+
+### 移除（宿主还原）
+
+- 还原 `dsh-host-frontend-static/lib/index.js` 注入的 `<style id="dsh-mobile-fit">`
+- 还原 `dsh-web-frontend/dist/index.html` 同款注入
+- 还原 `dsh-client-ui-settings-general/lib/client.js` 注入的设置页 CSS
+  → 其中有效的规则已迁入插件，其余（全局 44px 触摸、全局 14px 字号、全局 padding）弃用
+
+三处均用 `npm pack @deepseek-ai/<pkg>@0.2.1-rc.5` 官方产物覆盖并 `diff` 校验为 0 差异。
+
+> 元凶定位：注入的 `[class*="_surface_"]{max-width:calc(100vw - 20px)!important}`
+> 同时造成「弹出菜单被压窄、文字变省略号」和「设置面板只有 370px 宽、右边空一条」。
+
+### 新增
+
+- `?dshm=off` 逃生开关：完全不加载插件，用于与原版对照
+- `docs/host-model.md`：宿主布局/字号/层级模型与开发红线
+- `host-patches/`：宿主改动留档 + 回滚说明
+- 隐藏会话页中间冗余的 ⋯（点开只有插件市场，与侧栏「插件」重复）
+- 设置页手机全屏（改由插件实现，加 `!important` 覆盖宿主后加载样式）
+
+### 修复
+
+- **字号设置失效**：移除插件里硬编码的 `font-size`（曾锁死正文 15px、代码 13px、输入框 16px），改由宿主的 `--dsw-font-markdown-*` 变量控制
+- **侧栏要点两次**：汉堡按钮在展开后不再隐身，改为显示 ✕，再点一次即关闭；展开逻辑从「60ms 试一次」改为「每 100ms 重试，最多 15 次」
+- **弹出菜单被压窄**：移除 `[class*='surface']{max-width:100%}`，菜单宽度 144px → 156px，`下载 Session 日志` 不再变省略号
+- **插件页标题被推右 52px**：`header{padding-left:52px}` 收窄为仅匹配含 `titleRow` 的 header
+- **长按会话项导致抽屉闪关**：新增 `contextmenu` 时间戳 + 按住时长（>550ms）双信号判定
+- **插件页卡片右侧溢出 8px、整页可左右拖动**：收掉卡片负外边距的右半边
+- **`svg{height:auto}` 导致图标高度被改**：从媒体规则中移除 `svg`
+
+## [1.1.0] - 2025-11-04
+
+- 首个可用版本：侧栏抽屉、遮罩、汉堡按钮、回到底部、阅读排版、输入区适配
+- 附带 nginx 网关部署包（HTTP/2 + 资源长缓存 + 令牌认证）
+
+## [1.0.0] - 2025-11-03
+
+- 原型验证

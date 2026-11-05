@@ -1,7 +1,7 @@
 {
   "name": "dsh-plugin-mobile-ux",
-  "version": "1.0.0",
-  "description": "DSH 手机端体验增强：侧栏抽屉化、阅读排版、触摸目标、安全区适配",
+  "version": "1.3.0",
+  "description": "DeepSeek Harness 手机端体验插件：侧栏抽屉、阅读排版、输入区适配、设置页全屏。纯前端注入，不修改宿主源码。",
   "private": true,
   "type": "module",
   "main": "lib/index.js",
@@ -22,5 +22,23 @@
       "immediately": true
     }
   },
-  "license": "MIT"
+  "license": "MIT",
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "mobile",
+    "responsive",
+    "ios",
+    "pwa"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wond03/dsh-plugin-mobile-ux.git"
+  },
+  "homepage": "https://github.com/wond03/dsh-plugin-mobile-ux#readme",
+  "bugs": {
+    "url": "https://github.com/wond03/dsh-plugin-mobile-ux/issues"
+  },
+  "author": "wond03"
 }

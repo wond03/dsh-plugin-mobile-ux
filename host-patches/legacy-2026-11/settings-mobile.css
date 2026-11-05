@@ -1,0 +1,44 @@
+/*dsh-mobile-start*/
+/* Phones (<=768px) and landscape phones (short viewports) get a full-screen
+   settings sheet: the left rail turns into a wrapping tab strip on top. */
+@media (max-width:768px), (max-height:520px) and (max-width:1024px){
+.VOzbGW_overlay{inset:0;padding:0;align-items:stretch;justify-content:stretch}
+.VOzbGW_mask{display:none}
+.VOzbGW_panel{width:100%;max-width:none;height:100vh;height:100dvh;border-radius:0;box-shadow:none;flex-direction:column}
+.VOzbGW_nav{width:100%;flex:none;flex-direction:column;gap:6px;padding:calc(env(safe-area-inset-top,0px) + 8px) 12px 0;border-bottom:1px solid var(--dsw-alias-border-l2)}
+.VOzbGW_navTitle{padding:0 2px;font-size:15px;line-height:22px}
+.VOzbGW_navList{flex-direction:row;flex-wrap:wrap;gap:6px;overflow:visible;padding:0 2px 10px}
+.VOzbGW_navCell{flex:1 1 calc(50% - 3px);justify-content:center;height:34px;padding:0 12px;border-radius:999px;gap:6px;font-size:13px;line-height:20px;background:0 0;color:var(--dsw-alias-label-secondary)}
+.VOzbGW_navCell.VOzbGW_active{background:var(--dsw-specific-sidebar-nav-item-active);color:var(--dsw-alias-label-primary);font-weight:500}
+.VOzbGW_navLabel{flex:0 1 auto;min-width:0;text-overflow:ellipsis}
+.VOzbGW_navIcon{width:14px;height:14px}
+.VOzbGW_content{flex:1;min-height:0}
+.VOzbGW_header{height:auto;padding:2px 10px 2px 12px;align-items:center}
+.VOzbGW_close{width:36px;height:36px}
+.VOzbGW_options{padding:0 16px calc(env(safe-area-inset-bottom,0px) + 20px);overscroll-behavior:contain}
+/* rows that pair copy with a control stack instead of squeezing both */
+[data-shortcut-modal=settings] .Pt1bsG_row{flex-direction:column;align-items:stretch;gap:10px}
+/* touch targets: 34px buttons, 36px fields (16px text also stops iOS focus zoom) */
+[data-shortcut-modal=settings] button:not([class*=switch]):not([class*=arrow]){min-height:34px}
+[data-shortcut-modal=settings] input:not([type=checkbox]):not([type=radio]):not([type=range]),[data-shortcut-modal=settings] select,[data-shortcut-modal=settings] textarea{min-height:36px;font-size:16px}
+[data-shortcut-modal=settings] [class*=arrows]{display:none}
+[data-shortcut-modal=settings] input[class*=input]{padding-right:12px}
+[data-shortcut-modal=settings] button[class*=iconButton],[data-shortcut-modal=settings] button[class*=expander]{min-width:34px}
+[data-shortcut-modal=settings] button[class*=switch]{position:relative}
+[data-shortcut-modal=settings] button[class*=switch]::after{content:'';position:absolute;inset:-7px}
+/* plugin inventory: let the preset switcher drop under the group title */
+[data-shortcut-modal=settings] .qSYn7G_groupTitleRow{flex-wrap:wrap;row-gap:6px}
+[data-shortcut-modal=settings] .qSYn7G_switcherLabel{max-width:160px}
+/* agent preset cards: one column, wrap the head instead of widening the grid */
+[data-shortcut-modal=settings] .rtSEdW_cards{grid-template-columns:minmax(0,1fr)}
+[data-shortcut-modal=settings] .rtSEdW_cardHead{flex-wrap:wrap}
+[data-shortcut-modal=settings] .rtSEdW_cardIdentity{flex-wrap:wrap;row-gap:4px}
+[data-shortcut-modal=settings] .rtSEdW_cardFoot{overflow:hidden}
+}
+@media (min-width:600px){
+.VOzbGW_navCell{flex:0 1 auto}
+}
+@media (max-width:360px){
+.VOzbGW_navIcon{display:none}
+}
+/*dsh-mobile-end*/
